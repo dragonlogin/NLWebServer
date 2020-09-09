@@ -42,4 +42,12 @@ public:
 private:
     pthread_cond_t m_cond;
 };
+
+class MutexLockGuard {
+public:
+    MutexLockGuard(Locker locker);
+    ~MutexLockGuard();
+private:
+    Locker m_lock;
+};
 #endif //NLWEBSERVER_LOCKER_H

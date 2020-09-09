@@ -76,3 +76,11 @@ bool Cond::signal() {
 bool Cond::broadcast() {
     return pthread_cond_broadcast(&m_cond) == 0;
 }
+
+
+MutexLockGuard::MutexLockGuard(Locker locker) : m_lock(locker) {
+    m_lock.lock();
+}
+MutexLockGuard::~MutexLockGuard() {
+    m_lock.unlock();
+}
