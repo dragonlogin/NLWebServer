@@ -3,7 +3,9 @@
 //
 #ifndef NLWEBSERVER_LOCKER_H
 #define NLWEBSERVER_LOCKER_H
-#include "../common.h"
+#include <pthread.h>
+#include <semaphore.h>
+#include <exception>
 
 // 对信号量的 RAII封装
 class Sem {
@@ -39,13 +41,5 @@ public:
     bool broadcast();
 private:
     pthread_cond_t m_cond;
-};
-
-class MutexLockGuard {
-public:
-    MutexLockGuard(Locker locker);
-    ~MutexLockGuard();
-private:
-    Locker m_lock;
 };
 #endif //NLWEBSERVER_LOCKER_H
